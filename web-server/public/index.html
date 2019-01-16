@@ -19,13 +19,7 @@
             });
 
 
-          webAuth.authorize = ({
-            prompt: 'consent',
-            response_type: 'code',
-            audience: 'https://superdog.auth0.com/api/v2/',
-            scope: 'email openid profile',
-            redirect_uri: 'http://localhost:3000/oauth'
-          });
+          webAuth.authorize = ({ connection: facebook, });
 
           let QueryString = Object.keys(options).map( (key,i) => {
             return `${key}=` + encodeURIComponent(options[key]);
