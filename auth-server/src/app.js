@@ -1,31 +1,60 @@
 'use strict';
 
-// 3rd Party Resources
 const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-
-// Esoteric Resources
-const errorHandler = require( './middleware/error.js');
-const notFound = require( './middleware/404.js' );
-const authRouter = require( './auth/router.js' );
-
-// Prepare the express app
+const session = require('express-session');
+const dontenv = require('dotenv');
+dontenv.config();
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const userInViews = require('./middleware/user-in-views.js');
+const authRouter = require('./routes/auth.js');
+const indexRouter = require('./routes/index.js');
+const usersRouter = require('./routes/users.js');
 const app = express();
 
-// App Level MW
-app.use(cors());
-app.use(morgan('dev'));
+app.set('view engine', 'pug');
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+let sess = {
+  secret: process.env.AUTH0_CLIENT_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+};
 
-// Routes
-app.use(authRouter);
+if (app.get('env') === 'production') {
+  sess.cookie.secure = true; //serve secure cookies, requires https
+}
 
-// Catchalls
-app.use(notFound);
-app.use(errorHandler);
+let strategy = new Auth0Strategy({
+  domain: process.env.AUTH0_DOMAIN,
+  clientID: process.env.AUTH0_CLIENT_ID,
+  clientSecret: process.env.AUTH0_CLIENT_SECRET,
+  callbackURL:
+    process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+  },
+  function (accessToken, refreshToken, extraParams, profile, done) {
+    return done(null, profile);
+});
+
+app.use(session(sess));
+passport.use(strategy);
+app.use(passport.initialize()); // needs to be after app.use(session(sess))
+app.use(passport.session()); // needs to be after app.use(session(sess))
+
+
+app.use(userInViews());
+app.use('/', authRouter);
+app.use('/', indexRouter);
+app.use('/', usersRouter);
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
 
 let isRunning = false;
 

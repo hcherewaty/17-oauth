@@ -1,14 +1,14 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name: OAUTH - {Provider}
+## Project Name: OAUTH - Auth0
 
-### Author: Student/Group Name
+### Author: Heather Cherewaty, Brent Woodward, & Jacob Anderson
 
 ### Links and Resources
-* [repo](http://xyz.com)
+* [repo](https://github.com/hcherewaty/17-oauth)
 * [back-end demo](http://xyz.com) 
-* [front-end demo](http://xyz.com)
+* [front-end demo](https://superdog-app1.herokuapp.com/)
 
 #### Documentation
 * [assessment report](./REPORT.md)
