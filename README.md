@@ -7,7 +7,7 @@
 
 ### Links and Resources
 * [repo](https://github.com/hcherewaty/17-oauth)
-* [back-end demo](http://xyz.com) 
+<!-- * [back-end demo](http://xyz.com)  -->
 * [front-end demo](https://superdog-app1.herokuapp.com/)
 
 #### Documentation
@@ -17,11 +17,10 @@
 #### `auth/middleware/oauth/{filename}.js`
 * List any usage/requirement notes in here
 
-##### Implementation Notes
-* Must the server be secured?  How?
-* Required ENV Variables
+##### Implementation Notes  
+* Required ENV Variables:  AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN
 * Accessing the server
 * OAuth Link 
 
 #### UML
-Link to an image of the UML for your application code and response to events
+![UML Image](IMG_3109.jpg)
