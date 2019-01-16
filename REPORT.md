@@ -1,9 +1,9 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) OAuth Comparative Analysis
 ================================================================
 
-## OAuth Provider Name 
+## OAuth Auth0
 
-### Research Conducted By: Student Names
+### Research Conducted By: Heather Cherewaty, Brent Woodward, & Jacob Anderson
 
 ### Overall Score and Comments
 #### Score (Out of 10): 7
